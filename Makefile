@@ -3,7 +3,7 @@
 ###############################################################################
 
 # TODO: altere a extensão dos arquivos (c ou cpp)
-EXT = cpp
+EXT = c
 # TODO: altere a lista de forma que contenha todos os arquivos .cpp
 #       do seu projeto (sem a extensão), que deve estar no diretório 
 #       src/montador
