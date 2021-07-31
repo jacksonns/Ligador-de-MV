@@ -1,0 +1,9 @@
+main 0
+a 11
+add100 -1
+const100 10
+
+size: 12
+
+prog: 
+3 0 2 0 a 19 add100 4 0 0 100 -1 

@@ -136,9 +136,8 @@ SymTable * add_address(char symbol[], int addr, SymTable *head){
 
 void print_table(SymTable *head){
     SymTable *aux = head;
-    printf("Símbolo \t Endereço\n");
     while (aux != NULL){
-        printf("%s \t %d\n", aux->symbol, aux->mem_addr);
+        printf("%s %d\n", aux->symbol, aux->mem_addr);
         aux = aux->next;
     }
 }
@@ -203,8 +202,11 @@ SymTable * pass_one(FILE *arq, SymTable *head){
             }
         }
     }
-    printf("MV-EXE\n\n");
-    printf("%d 1000 999 %d\n\n", prog_size, 1000+num_word);
+    print_table(head);
+    printf("\nsize: %d\n",prog_size);
+    printf("\nprog: \n");
+    //printf("MV-EXE\n\n");
+    //printf("%d 1000 999 %d\n\n", prog_size, 1000+num_word);
     return head;
 }
 
@@ -241,14 +243,14 @@ void pass_two(FILE *arq, SymTable *head) {
                             } else if ((address_or_code == 1) || (address_or_code == 2)) { //Instruções com resgistrador e memória
                                 word = strtok(NULL, " "); //Próxima palavra
                                 mem_addr++;
-                                printf("%d ", get_address(word, head) - mem_addr);
+                                printf("%s ", word);
                             }
 
                         } else if ((address_or_code >= 16) && (address_or_code <= 19)) { //Instruções só com memória
                             printf("%d ", address_or_code);
                             word = strtok(NULL, " "); //Próxima palavra
                             mem_addr += 2;
-                            printf("%d ", get_address(word, head) - mem_addr);
+                            printf("%s ", word);
 
                         } else if (address_or_code == 21) { //Word
                             word = strtok(NULL, " "); //Próxima palavra
