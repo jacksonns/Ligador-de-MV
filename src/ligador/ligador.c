@@ -113,3 +113,49 @@ SymTable * link_tables(int argc, char *argv[], SymTable *head){
     print_table(head);
     return head;
 }
+
+void link_prog(int argc, char *argv[], SymTable *head){
+    FILE *file;
+    char line[100];
+    char *word;
+    int instr, mem_addr = 0;
+
+    // Itera sobre cada arquivo.
+    for (int i = 1; i < argc; i++){
+        file = fopen(argv[i], "rt");
+        // Ignora arquivo até achar label "prog"
+        while(fgets(line, 100, file) != NULL){
+            line[strcspn(line, "\r\n")] = 0;
+            word = strtok(line, " ");
+            if (word != NULL && strcmp(word, "prog:") == 0) break;
+        }
+
+        while(fscanf(file, "%s", word) != EOF){
+            instr = atoi(word);
+            printf("%d ", instr);
+            mem_addr++;
+
+            if ((instr >= 1) && (instr <= 15)) { //Instruções com pelo menos um registrador
+                fscanf(file, "%s", word); //Próxima palavra
+                printf("%s ", word);
+                mem_addr ++;
+
+                if ((instr == 5) || ((instr >= 8) && (instr <= 14))) { //Intruções com dois registradores
+                    fscanf(file, "%s", word); //Próxima palavra
+                    printf("%s ", word);
+                    mem_addr++;
+                } else if ((instr == 1) || (instr == 2)) { //Instruções com resgistrador e memória
+                    fscanf(file, "%s", word); //Próxima palavra   
+                    mem_addr++;   
+                    printf("%d ", get_address(word, head) - mem_addr);
+                }
+
+            } else if ((instr >= 16) && (instr <= 19)) { //Instruções só com memória
+                fscanf(file, "%s", word); //Próxima palavra
+                mem_addr ++;
+                printf("%d ", get_address(word, head) - mem_addr);
+            }
+        } 
+        fclose(file);
+    }
+}

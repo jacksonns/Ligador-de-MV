@@ -21,6 +21,7 @@ int main(int argc, char *argv[]) {
 
     SymTable *head = NULL;
     head = link_tables(argc, argv, head);
+    link_prog(argc, argv, head);
 
     return 0;
 }
