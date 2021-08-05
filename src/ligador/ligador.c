@@ -109,8 +109,8 @@ SymTable * link_tables(int argc, char *argv[], SymTable *head){
 
         fclose(file);
     }
-    printf("TABELA: \n");
-    print_table(head);
+    printf("MV-EXE\n\n");
+    printf("%d 1000 999 %d\n\n", prog_size, 1000 + get_address("main", head));
     return head;
 }
 
