@@ -205,8 +205,6 @@ SymTable * pass_one(FILE *arq, SymTable *head){
     print_table(head);
     printf("\nsize: %d\n",prog_size);
     printf("\nprog: \n");
-    //printf("MV-EXE\n\n");
-    //printf("%d 1000 999 %d\n\n", prog_size, 1000+num_word);
     return head;
 }
 
@@ -258,7 +256,7 @@ void pass_two(FILE *arq, SymTable *head) {
                             mem_addr++;
                             
                         } else if ((address_or_code == 22) || (address_or_code == -1)){ //End ou inválido
-                            printf("\b"); //Apaga espaço extra
+                            // printf("\b");
                             return;
 
                         } else if (address_or_code == 0 || address_or_code == 20){ // HALT ou RET
