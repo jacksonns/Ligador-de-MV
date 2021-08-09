@@ -74,7 +74,7 @@ SymTable * link_tables(int argc, char *argv[], SymTable *head){
     FILE *file;
     char line[100];
     char *word, *symbol;
-    int addr, prog_size = 0;
+    int addr, prog_size = 0, size = 0;
     // Itera sobre cada arquivo.
     for (int i = 1; i < argc; i++){
         file = fopen(argv[i], "rt");
@@ -85,7 +85,7 @@ SymTable * link_tables(int argc, char *argv[], SymTable *head){
             if (word != NULL){
                 if (strcmp(word, "size:") == 0){
                     word = strtok(NULL, " ");
-                    int size = atoi(word);
+                    size = atoi(word);
                     prog_size += size;
                     break;
                 } else if (strcmp(word, "prog:") == 0){
@@ -131,29 +131,37 @@ void link_prog(int argc, char *argv[], SymTable *head){
         }
 
         while(fscanf(file, "%s", word) != EOF){
-            instr = atoi(word);
-            printf("%d ", instr);
-            mem_addr++;
+            // Caso não seja constante definida por WORD:
+            if(strcmp(word, "WORD") != 0){
+                instr = atoi(word);
+                printf("%d ", instr);
+                mem_addr++;
 
-            if ((instr >= 1) && (instr <= 15)) { //Instruções com pelo menos um registrador
-                fscanf(file, "%s", word); //Próxima palavra
-                printf("%s ", word);
-                mem_addr ++;
-
-                if ((instr == 5) || ((instr >= 8) && (instr <= 14))) { //Intruções com dois registradores
+                if ((instr >= 1) && (instr <= 15)) { //Instruções com pelo menos um registrador
                     fscanf(file, "%s", word); //Próxima palavra
                     printf("%s ", word);
-                    mem_addr++;
-                } else if ((instr == 1) || (instr == 2)) { //Instruções com resgistrador e memória
-                    fscanf(file, "%s", word); //Próxima palavra   
-                    mem_addr++;   
+                    mem_addr ++;
+
+                    if ((instr == 5) || ((instr >= 8) && (instr <= 14))) { //Intruções com dois registradores
+                        fscanf(file, "%s", word); //Próxima palavra
+                        printf("%s ", word);
+                        mem_addr++;
+                    } else if ((instr == 1) || (instr == 2)) { //Instruções com resgistrador e memória
+                        fscanf(file, "%s", word); //Próxima palavra   
+                        mem_addr++;   
+                        printf("%d ", get_address(word, head) - mem_addr);
+                    }
+
+                } else if ((instr >= 16) && (instr <= 19)) { //Instruções só com memória
+                    fscanf(file, "%s", word); //Próxima palavra
+                    mem_addr ++;
                     printf("%d ", get_address(word, head) - mem_addr);
                 }
-
-            } else if ((instr >= 16) && (instr <= 19)) { //Instruções só com memória
+                // Ignora "WORD" e imprime constante
+            } else{
                 fscanf(file, "%s", word); //Próxima palavra
-                mem_addr ++;
-                printf("%d ", get_address(word, head) - mem_addr);
+                printf("%s ", word);
+                mem_addr++;
             }
         } 
         fclose(file);

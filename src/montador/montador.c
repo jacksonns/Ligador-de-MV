@@ -252,7 +252,7 @@ void pass_two(FILE *arq, SymTable *head) {
 
                         } else if (address_or_code == 21) { //Word
                             word = strtok(NULL, " "); //Próxima palavra
-                            printf("%s ", word);
+                            printf("WORD %s ", word);
                             mem_addr++;
                             
                         } else if ((address_or_code == 22) || (address_or_code == -1)){ //End ou inválido

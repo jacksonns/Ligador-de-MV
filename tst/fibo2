@@ -1,11 +1,11 @@
-print1 0
-fibo 3
-const0 -1
-const1 -1
-loop 12
-output 28
+main 0
+const1 19
+const3 20
+print1 -1
+fibo -1
+const0 18
 
-size: 31
+size: 21
 
 prog: 
-4 0 0 9 3 0 1 1 const0 1 2 const1 6 2 8 2 1 7 1 6 2 9 3 0 17 output 19 loop 4 2 0 
+1 0 const1 1 1 const3 3 3 5 2 3 9 2 1 18 print1 16 fibo WORD 0 WORD 1 WORD 3 
