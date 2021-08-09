@@ -1,0 +1,11 @@
+main 0
+const1 19
+const3 20
+print1 -1
+fibo -1
+const0 18
+
+size: 21
+
+prog: 
+1 0 const1 1 1 const3 3 3 5 2 3 9 2 1 18 print1 16 fibo 0 1 3 

@@ -1,0 +1,20 @@
+;;;;;;;;;;;;;;;;; Fibonacci ;;;;;;;;;;;;;;;;;;;;
+;Entrada: n
+;Saída: n-ésimo número da sequência de Fibonacci
+
+main: LOAD R0 const1
+      LOAD R1 const3
+      READ R3
+      COPY R2 R3
+      SUB R2 R1
+      JN print1  ; Se n-3 < 0, então printa 1 na saída
+      JUMP fibo  ; Se não, inicia o loop pra achar o nº
+
+;;;;;;;;; Declaração de constantes ;;;;;;;;;
+const0: WORD 0
+
+const1: WORD 1
+
+const3: WORD 3
+
+END
