@@ -1,0 +1,26 @@
+;;;;;;;;;;;;;;;;; Mediana ;;;;;;;;;;;;;;;;;;;;
+;Entrada: n1 n2 n3 n4 n5
+;Saída: Mediana dos números recebidos
+
+main: READ R0 ;R0 é n1
+READ R1 ;R1 é n2
+COPY R2 R1
+SUB R2 R0 ; R2 = n2 - n1 ; menor que 0 se n1 maior
+JN n1_maior_n2
+STORE R0 m1 ;menor (n1) no primeiro lugar da fila
+STORE R1 m2 ;maior (n2) no segundo
+JUMP ler_n3 ;lê 3o número
+
+;;;;;;;; Output da mediana ;;;;;;;;;;;
+fim: LOAD R0 m3 ;Do meio é mediana
+WRITE R0
+HALT
+
+;;;;;;;;; Declaração de constantes para memória ;;;;;;;;;
+m1: WORD 200
+m2: WORD 201
+m3: WORD 202
+m4: WORD 203
+m5: WORD 204
+
+END

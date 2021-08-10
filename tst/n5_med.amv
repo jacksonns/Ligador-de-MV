@@ -1,0 +1,35 @@
+ler_n5: READ R0 ;R0 é n5
+LOAD R1 m4 ;R1 é n4
+COPY R2 R0
+SUB R2 R1 ;R2 = n5 - n4; menor que 0 se n4 for maior
+JN n4_maior_n5
+STORE R0 m5 ;n5 é o maior, topo da fila
+JUMP fim ;vai para o fim
+
+n4_maior_n5: STORE R1 m5 ;sobe n4 na fila
+LOAD R1 m3 ;R1 é n3
+COPY R2 R0
+SUB R2 R1 ;R2 = n5 - n3; menor que 0 se n3 for maior
+JN n3_maior_n5
+STORE R0 m4 ;n5 segundo maior
+JUMP fim ;vai para o fim
+
+n3_maior_n5: STORE R1 m4 ;sobe n3 na fila
+LOAD R1 m2 ;R1 é n2
+COPY R2 R0
+SUB R2 R1 ;R2 = n5 - n2; menor que 0 se n2 for maior
+JN n2_maior_n5
+STORE R0 m3 ;n5 terceiro maior
+JUMP fim ;vai para o fim
+
+n2_maior_n5: STORE R1 m3 ;sobe n2 na fila
+LOAD R1 m1 ;R1 é n1
+COPY R2 R0
+SUB R2 R1 ;R2 = n5 - n1; menor que 0 se n1 for maior
+JN n1_maior_n5
+STORE R0 m2 ;n5 quarto maior
+JUMP fim ;vai para o fim
+
+n1_maior_n5: STORE R1 m2 ;sobe n1 na fila
+STORE R0 m1 ;n5 menor de todos
+JUMP fim ;vai para o fim

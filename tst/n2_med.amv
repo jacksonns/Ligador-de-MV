@@ -1,0 +1,3 @@
+n1_maior_n2: STORE R1 m1 ;menor (n2) no primeiro lugar da fila
+STORE R0 m2 ;maior (n1) no segundo
+JUMP ler_n3 ;lê 3o número

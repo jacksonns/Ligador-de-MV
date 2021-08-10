@@ -1,0 +1,19 @@
+ler_n3: READ R0 ;R0 é n3
+LOAD R1 m2 ;R1 é n2 (atualizado para maior da fila)
+COPY R2 R0
+SUB R2 R1 ;R2 = n3 - n2; menor que 0 se n2 maior
+JN n2_maior_n3
+STORE R0 m3 ;n3 é o maior, topo da fila
+JUMP ler_n4 ;lê o 4o número
+
+n2_maior_n3: STORE R1 m3 ;n2 é maior, topo da fila
+LOAD R1 m1 ;R1 é n1
+COPY R2 R0 
+SUB R2 R1 ;R2 = n3 - n1; menor que 0 se n1 maior
+JN n1_maior_n3
+STORE R0 m2 ;n3 segundo maior
+JUMP ler_n4 ;lê o 4o número
+
+n1_maior_n3: STORE R1 m2 ;sobe n1 na fila
+STORE R0 m1 ;n3 menor de todos
+JUMP ler_n4 ;lê o 4o número
