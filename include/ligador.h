@@ -15,3 +15,5 @@ void print_table(SymTable *head);
 
 //Passos do ligador
 SymTable * link_tables(int agrc, char *files[], SymTable *head);
+
+void link_prog(int argc, char *argv[], SymTable *head);
